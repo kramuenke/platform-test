@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"os"
 )
 
 type metadata struct {
@@ -16,7 +17,7 @@ func NewMetadata() http.HandlerFunc {
 		data := new(metadata)
 		data.Version = "1.0"
 		data.Description = "platform test app"
-		data.CommitSha = "1234"
+		data.CommitSha = os.Getenv("COMMIT_SHA")
 		json.NewEncoder(w).Encode(data)
 	}
 }

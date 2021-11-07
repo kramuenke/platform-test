@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -12,6 +13,8 @@ import (
 func TestMetadataHandler(t *testing.T) {
 	req := httptest.NewRequest(http.MethodGet, "/", nil)
 	res := httptest.NewRecorder()
+
+	os.Setenv("COMMIT_SHA", "1234")
 
 	NewMetadata()(res, req)
 
