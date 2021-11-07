@@ -6,8 +6,18 @@ jobs:
     steps:
       - checkout
       - run: make test
+  publish:
+    machine: true
+    steps:
+      - checkout
+      - run: echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+      - run: docker build -t kramuenk/platform-test:$CIRCLE_BUILD_NUM .
+      - run: docker push kramuenk/platform-test:$CIRCLE_BUILD_NUM
 
 workflows:
   test-workflow:
     jobs:
       - test
+      - publish:
+          requires:
+            - test
