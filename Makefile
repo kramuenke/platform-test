@@ -1,3 +1,9 @@
+IMAGE_NAME = kramuenke/platform-test
+
+ifndef CIRCLE_BUILD_NUM
+	override CIRCLE_BUILD_NUM = 0
+endif
+
 .PHONY: test
 test:  ## Create the docker image.
 	@echo "--- test"
@@ -12,3 +18,11 @@ test:  ## Create the docker image.
 start:
 	@echo "--- :fire: start :fire:"
 	cd app; go run ./cmd/...
+
+.PHONY: build
+build:
+	docker build -t ${IMAGE_NAME}:${CIRCLE_BUILD_NUM} .
+
+.PHONY: push
+push:
+	docker push ${IMAGE_NAME}:${CIRCLE_BUILD_NUM}

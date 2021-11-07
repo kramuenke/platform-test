@@ -11,8 +11,8 @@ jobs:
     steps:
       - checkout
       - run: echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
-      - run: docker build -t kramuenke/platform-test:$CIRCLE_BUILD_NUM .
-      - run: docker push kramuenke/platform-test:$CIRCLE_BUILD_NUM
+      - run: make build
+      - run: make push
 
 workflows:
   test-workflow:
