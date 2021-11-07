@@ -14,6 +14,10 @@ test:  ## Create the docker image.
 		golang:1.16-bullseye \
 		scripts/test.sh
 
+.PHONY: local-test
+local-test:
+	scripts/test.sh
+
 .PHONY: start
 start:
 	@echo "--- :fire: start :fire:"
