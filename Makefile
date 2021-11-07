@@ -21,7 +21,7 @@ start:
 
 .PHONY: build
 build:
-	docker build -t ${IMAGE_NAME}:${CIRCLE_BUILD_NUM} .
+	docker build --build-arg CIRCLE_SHA1 -t ${IMAGE_NAME}:${CIRCLE_BUILD_NUM} .
 
 .PHONY: push
 push:

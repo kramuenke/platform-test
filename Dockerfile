@@ -18,6 +18,7 @@ COPY --from=builder /bin/platform-test /bin/
 
 EXPOSE 8080
 
-ENV COMMIT_SHA ${CIRCLE_SHA1}
+ARG CIRCLE_SHA1
+ENV COMMIT_SHA=$CIRCLE_SHA1
 
 ENTRYPOINT [ "platform-test" ]
