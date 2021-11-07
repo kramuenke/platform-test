@@ -12,7 +12,7 @@ func TestHelloHandler(t *testing.T) {
 
 	NewHello()(res, req)
 
-	expectedCode := http.StatusCreated
+	expectedCode := http.StatusOK
 	if res.Code != expectedCode {
 		t.Errorf("got status %d but expected %d", res.Code, expectedCode)
 	}
